@@ -1,6 +1,7 @@
 import Contact from './components/shared/Contact/index.jsx';
 import Footer from './components/shared/Footer/index.jsx';
 import Header from './components/shared/Header/index.jsx';
+import Hero from './components/shared/Hero/index.jsx';
 import Team from './components/shared/Team/index.jsx';
 // import Button from './components/ui/Button/index.jsx';
 // import Header from './components/Header.jsx'
@@ -14,6 +15,7 @@ function Home(){
         {/* <Button /> */}
 
         <Header />
+        <Hero />
         <Team />
         <Contact />
         <Footer />
