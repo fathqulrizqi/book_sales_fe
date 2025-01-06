@@ -1,0 +1,17 @@
+footer {
+    background-color: darkslategrey;
+    padding: 10px 0px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    display: flex;
+    bottom: 0;  
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__paragraph {
+    color: white;
+    text-align: center;
+}
+
