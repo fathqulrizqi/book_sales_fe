@@ -20,8 +20,8 @@ export default function Author(){
         newAuthorElement.innerHTML = 
         `
             <img src="${newAuthor.imageUrl}" />
-            <h2 className="text-gray-900 title-font font-medium">${newAuthor.name}</h2>
-            <p className="text-gray-500">${newAuthor.bio}</p>
+            <h2 class="text-gray-900 title-font font-medium">${newAuthor.name}</h2>
+            <p class="text-gray-500">${newAuthor.bio}</p>
         `;
 
         authorContainerRef.current.appendChild(newAuthorElement);
@@ -31,10 +31,10 @@ export default function Author(){
     }
 
     return (
-        <section className="text-gray-600 body-font">
+        <section className="body-font">
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Authors</h1>
+                    <h1 className="sm:mb-4 text-4xl tracking-tight font-extrabold text-center">Authors</h1>
                     <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
                 <div ref={authorContainerRef} className="flex flex-wrap -m-2">
@@ -51,7 +51,7 @@ export default function Author(){
                     ))}
                 </div>
 
-                    <button onClick={handleClick} className="flex mx-auto mt-10 ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Send</button>
+                    <button onClick={handleClick} className="flex mx-auto mt-10 ml-auto text-white bg-indigo-700 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Send</button>
 
             </div>
         </section>
