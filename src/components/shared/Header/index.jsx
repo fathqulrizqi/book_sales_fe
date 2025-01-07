@@ -15,10 +15,10 @@ export default function Header() {
                 <a className="hover:text-gray-900" href="#contact">Contact</a>
               </li>
               <li>
-                <a className="hover:text-gray-900" href="#blog">Blog</a>
+                <a className="hover:text-gray-900" href="#blog">Shop</a>
               </li>
               <li>
-                <a className="hover:text-gray-900" href="#portfolio">Portfolio</a>
+                <a className="hover:text-gray-900" href="#portfolio">Categories</a>
               </li>
             </ul>
           </nav>
