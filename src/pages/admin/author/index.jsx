@@ -16,11 +16,11 @@ export default function Author(){
 
     if (authorContainerRef.current){
         const newAuthorElement = document.createElement("div");
-        newAuthorElement.className = "p-1 lg:w-1/2 md:w-1 w-full";
+        newAuthorElement.className = "p-1 w-full md:w-1/2 lg:w-1/2";
         newAuthorElement.innerHTML = 
         `<div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
             <img class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="${newAuthor.imageUrl}" />
-            <div class="flex-grow"
+            <div class="flex-grow">
                 <h2 class="text-gray-900 title-font font-medium">${newAuthor.name}</h2>
                 <p class="text-gray-500">${newAuthor.bio}</p>
             </div>

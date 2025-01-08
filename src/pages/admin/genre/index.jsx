@@ -11,7 +11,7 @@ export default function Genre() {
           <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:px-8 md:space-y-0 sm:px-8">
             {genres.map((genre) => (
               <div>
-                <h3 className="text-xl text-center text-indigo-900 font-bold">{genre.name}</h3>
+                <h3 className="text-xl text-center text-indigo-900 font-bold mb-4">{genre.name}</h3>
                 <p className="text-gray-500 text-justify ">{genre.description}</p>
               </div>
             ))}
