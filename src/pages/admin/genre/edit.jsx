@@ -1,5 +1,5 @@
 
-export default function GenreCreate() {
+export default function GenreEdit() {
   return (
     <div className="flex flex-col gap-9">
       <div
@@ -9,7 +9,7 @@ export default function GenreCreate() {
           className="border-b border-stroke px-6.5 py-4 dark:border-strokedark"
         >
           <h3 className="font-medium text-black dark:text-white">
-            Add Data
+            Edit Data
           </h3>
         </div>
         <form action="#" className="py-5">

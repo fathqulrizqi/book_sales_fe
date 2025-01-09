@@ -1,4 +1,6 @@
-export default function Genres() {
+import { Link } from "react-router-dom";
+
+export default function AdminBooks() {
   return (
     <div
       className="rounded-sm shadow-default dark:bg-boxdark sm:px-7.5 xl:pb-1"
@@ -8,14 +10,19 @@ export default function Genres() {
           <thead className="border-b bg-gray-50 text-white">
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
               <th
-                className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11"
+                className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11"
               >
-                Name
+                Package
               </th>
               <th
-                className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white"
+                className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white"
               >
-                Description
+                Invoice date
+              </th>
+              <th
+                className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white"
+              >
+                Status
               </th>
               <th className="px-4 py-4 font-medium text-black dark:text-white">
                 Actions
@@ -35,9 +42,16 @@ export default function Genres() {
                 <p className="text-black dark:text-white">Jan 13,2023</p>
               </td>
               <td className="px-4 py-5">
+                <p
+                  className="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success"
+                >
+                  Paid
+                </p>
+              </td>
+              <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">
-                  <a href=""><i className="fa-solid fa-plus"></i></a>
-                  <a href=""><i className="fa-solid fa-pen-to-square"></i></a>
+                  <Link to="/admin/books/create"><i className="fa-solid fa-plus"></i></Link>
+                  <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
                   <button>
                     <i className="fa-solid fa-trash"></i>
                   </button>
@@ -61,10 +75,17 @@ export default function Genres() {
                 <p className="text-black dark:text-white">Jan 13,2023</p>
               </td>
               <td className="px-4 py-5">
+                <p
+                  className="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success"
+                >
+                  Paid
+                </p>
+              </td>
+              <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">
-                  <a href=""><i className="fa-solid fa-plus"></i></a>
-                  <a href=""><i className="fa-solid fa-pen-to-square"></i></a>
-                  <a href=""><i className="fa-solid fa-trash"></i></a>
+                  <Link to="/admin/books/create"><i className="fa-solid fa-plus"></i></Link>
+                  <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
+                  <button><i className="fa-solid fa-trash"></i></button>
                 </div>
               </td>
             </tr>
