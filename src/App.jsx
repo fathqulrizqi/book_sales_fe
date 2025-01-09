@@ -10,8 +10,8 @@ import BookCreate from "./pages/admin/books/create.jsx"
 import BookEdit from "./pages/admin/books/edit.jsx"
 import Login from "./pages/auth/login"
 import Register from "./pages/auth/register"
-import Team from "./components/shared/Team/index.jsx"
 import Contact from "./components/shared/Contact/index.jsx"
+import Developer from "./components/shared/Team/index.jsx"
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="/books" element={<PublicBooks />} />
-            <Route path="/teams" element={<Team />} />
+            <Route path="/developer" element={<Developer />} />
             <Route path="/contacts" element={<Contact />} />
           </Route>
 

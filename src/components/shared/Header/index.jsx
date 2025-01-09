@@ -27,7 +27,7 @@ export default function Header() {
                           <Link to="/books" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-indigo-700 lg:p-0 :text-gray-400 lg::hover:text-white :hover:bg-gray-700 :hover:text-white lg::hover:bg-transparent :border-gray-700">Book</Link>
                       </li>
                       <li>
-                          <Link to="/teams" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-indigo-700 lg:p-0 :text-gray-400 lg::hover:text-white :hover:bg-gray-700 :hover:text-white lg::hover:bg-transparent :border-gray-700">Team</Link>
+                          <Link to="/developer" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-indigo-700 lg:p-0 :text-gray-400 lg::hover:text-white :hover:bg-gray-700 :hover:text-white lg::hover:bg-transparent :border-gray-700">Developer</Link>
                       </li>
                       <li>
                           <Link to="/contacts" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-indigo-700 lg:p-0 :text-gray-400 lg::hover:text-white :hover:bg-gray-700 :hover:text-white lg::hover:bg-transparent :border-gray-700">Contact</Link>
