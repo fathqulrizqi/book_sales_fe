@@ -34,7 +34,7 @@ export default function Developer() {
               </h1>
               <div className="flex flex-wrap justify-between">
                 
-                <div className="w-full sm:w-1/3 px-12 mb-8">
+                <div className="w-full sm:w-1/3 px-12">
                   <div className="mb-2">
                     <i className="fa-solid fa-palette fa-lg"></i>
                   </div>
@@ -42,7 +42,7 @@ export default function Developer() {
                   <p className="text-indigo-400">Prioritizing user experience through aesthetic and user-friendly designs using Figma</p>
                 </div>
 
-                <div className="w-full sm:w-1/3 px-12 mb-8">
+                <div className="w-full sm:w-1/3 px-12">
                   <div className="mb-2">
                     <i className="fa-solid fa-window-maximize fa-xl"></i>
                   </div>
@@ -50,7 +50,7 @@ export default function Developer() {
                   <p className="text-indigo-400">Crafting intuitive interfaces with modern frameworks using React</p>
                 </div>
 
-                <div className="w-full sm:w-1/3 px-12 mb-8">
+                <div className="w-full sm:w-1/3 px-12">
                   <div className="mb-2">
                     <i className="fa-solid fa-code fa-xl"></i>
                   </div>

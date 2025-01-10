@@ -11,7 +11,7 @@ import BookEdit from "./pages/admin/books/edit.jsx"
 import Login from "./pages/auth/login"
 import Register from "./pages/auth/register"
 import Contact from "./components/shared/Contact/index.jsx"
-import Developer from "./components/shared/Team/index.jsx"
+import Developer from "./components/shared/Developer/index.jsx"
 
 function App() {
 
