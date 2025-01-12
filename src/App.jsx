@@ -12,12 +12,15 @@ import Login from "./pages/auth/login"
 import Register from "./pages/auth/register"
 import Contact from "./components/shared/Contact/index.jsx"
 import Developer from "./components/shared/Developer/index.jsx"
-import Genres from "./pages/admin/genre/index.jsx"
-import GenreEdit from "./pages/admin/genre/edit.jsx"
-import GenreCreate from "./pages/admin/genre/create.jsx"
-import Authors from "./pages/admin/author/index.jsx"
-import AuthorEdit from "./pages/admin/author/edit.jsx"
-import AuthorCreate from "./pages/admin/author/create.jsx"
+import Genres from "./pages/admin/genres/index.jsx"
+import GenreEdit from "./pages/admin/genres/edit.jsx"
+import GenreCreate from "./pages/admin/genres/create.jsx"
+import Authors from "./pages/admin/authors/index.jsx"
+import AuthorEdit from "./pages/admin/authors/edit.jsx"
+import AuthorCreate from "./pages/admin/authors/create.jsx"
+import PaymentMethodsEdit from "./pages/admin/payment_methods/edit.jsx"
+import PaymentMethodsCreate from "./pages/admin/payment_methods/create.jsx"
+import PaymentMethods from "./pages/admin/payment_methods/index.jsx"
 
 function App() {
 
@@ -51,6 +54,11 @@ function App() {
               <Route index element={<Authors />} />
               <Route path="edit" element={<AuthorEdit />} />
               <Route path="create" element={<AuthorCreate />} />
+            </Route>
+            <Route path="payment_methods">
+              <Route index element={<PaymentMethods />} />
+              <Route path="edit" element={<PaymentMethodsEdit />} />
+              <Route path="create" element={<PaymentMethodsCreate />} />
             </Route>
           </Route>
         </Routes>
