@@ -12,6 +12,9 @@ import Login from "./pages/auth/login"
 import Register from "./pages/auth/register"
 import Contact from "./components/shared/Contact/index.jsx"
 import Developer from "./components/shared/Developer/index.jsx"
+import Genres from "./pages/admin/genre/index.jsx"
+import GenreEdit from "./pages/admin/genre/edit.jsx"
+import GenreCreate from "./pages/admin/genre/create.jsx"
 
 function App() {
 
@@ -35,6 +38,11 @@ function App() {
               <Route index element={<AdminBooks />} />
               <Route path="create" element={<BookCreate />} />
               <Route path="edit" element={<BookEdit />} />
+            </Route>
+            <Route path="genres">
+              <Route index element={<Genres />} />
+              <Route path="edit" element={<GenreEdit />} />
+              <Route path="create" element={<GenreCreate />} />
             </Route>
           </Route>
         </Routes>

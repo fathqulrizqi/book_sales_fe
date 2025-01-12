@@ -3,12 +3,12 @@ export default function GenreEdit() {
   return (
     <div className="flex flex-col gap-9">
       <div
-        className="rounded-sm bg-white shadow-default dark:bg-boxdark"
+        className="rounded-sm bg-white shadow-default :bg-box"
       >
         <div
-          className="border-b border-stroke px-6.5 py-4 dark:border-strokedark"
+          className="border-b border-stroke px-6.5 py-4 :border-stroke"
         >
-          <h3 className="font-medium text-black dark:text-white">
+          <h3 className="font-medium text-black :text-white">
             Edit Data
           </h3>
         </div>
@@ -17,25 +17,25 @@ export default function GenreEdit() {
             
             <div className="mb-4.5">
               <label
-                className="mb-3 block text-base font-medium text-black dark:text-white"
+                className="mb-3 block text-base font-medium text-black :text-white"
               >
                 Name
               </label>
               <input
                 type="text"
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-indigo-600"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               />
             </div>
 
             <div className="mb-4.5">
               <label
-                className="mb-3 block text-base font-medium text-black dark:text-white"
+                className="mb-3 block text-base font-medium text-black :text-white"
               >
                 Description
               </label>
               <textarea
                 rows="6"
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-indigo-600"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               ></textarea>
             </div>
 
