@@ -9,7 +9,7 @@ export default function BookCreate() {
           className="border-b border-stroke px-6.5 py-4 :border-stroke"
         >
           <h3 className="font-medium text-black :text-white">
-            Add Data
+            Add Data Book
           </h3>
         </div>
         <form action="#" className="py-5">

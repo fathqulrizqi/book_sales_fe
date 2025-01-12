@@ -22,6 +22,7 @@ export default function Books() {
     >
       
       <div className="max-w-full overflow-x-auto">
+      <h1 className="sm:text-3xl text-2xl font-medium title-font text-indigo-900 mb-4 px-4">Books</h1>
         <table className="w-full table-auto">
           <thead className="border-b bg-gray-50 text-white">
             <tr className="bg-gray-2 text-left :bg-meta-4">
