@@ -15,6 +15,9 @@ import Developer from "./components/shared/Developer/index.jsx"
 import Genres from "./pages/admin/genre/index.jsx"
 import GenreEdit from "./pages/admin/genre/edit.jsx"
 import GenreCreate from "./pages/admin/genre/create.jsx"
+import Authors from "./pages/admin/author/index.jsx"
+import AuthorEdit from "./pages/admin/author/edit.jsx"
+import AuthorCreate from "./pages/admin/author/create.jsx"
 
 function App() {
 
@@ -43,6 +46,11 @@ function App() {
               <Route index element={<Genres />} />
               <Route path="edit" element={<GenreEdit />} />
               <Route path="create" element={<GenreCreate />} />
+            </Route>
+            <Route path="authors">
+              <Route index element={<Authors />} />
+              <Route path="edit" element={<AuthorEdit />} />
+              <Route path="create" element={<AuthorCreate />} />
             </Route>
           </Route>
         </Routes>
