@@ -1,4 +1,4 @@
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { getAuthors } from "../../../services/authors";
 import { getGenres } from "../../../services/genres";

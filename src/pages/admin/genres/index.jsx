@@ -34,7 +34,7 @@ export default function Genres() {
       className="rounded-sm shadow-default :bg-box sm:px-7.5 xl:pb-1"
     >
       <div className="max-w-full overflow-x-auto">
-      <h1 className="sm:text-3xl text-2xl font-medium title-font text-indigo-900 mb-4 px-4">Genres</h1>
+      <h1 className="sm:text-3xl text-2xl font-medium title-font text-indigo-900 mb-4">Genres</h1>
       <Link to="create" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Add Data
       <i className="fa-solid fa-plus pl-4"></i>
       </Link>
