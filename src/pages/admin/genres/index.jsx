@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getGenres } from "../../../services/genres";
+import { deleteGenre, getGenres } from "../../../services/genres";
 import { useEffect, useState } from "react";
 
 export default function Genres() {
@@ -13,8 +13,22 @@ export default function Genres() {
     
       fetchGenres();  
     }, []);
+
+    const handleDelete = async (id) => {
+      const confirmDelete = window.confirm("Are you sure you want to delete this genre?");
+      
+      if (confirmDelete) {
+        try {
+          await deleteGenre(id); 
+          setGenres(genres.filter((genre) => genre.id !== id)); 
+          alert("Genre deleted successfully");
+        } catch (error) {
+          console.error("Failed to delete the genre:", error);
+          alert("Failed to delete the genre. Please try again later.");
+        }
+      }
+    };
   
-    console.log(genres)
   return (
     <div
       className="rounded-sm shadow-default :bg-box sm:px-7.5 xl:pb-1"
@@ -57,7 +71,7 @@ export default function Genres() {
               <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">
                   <Link to="edit"><i className="fa-solid fa-pen-to-square"></i></Link>
-                  <button>
+                  <button onClick={() => handleDelete(genre.id)}>
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </div>
