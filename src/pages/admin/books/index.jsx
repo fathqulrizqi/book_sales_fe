@@ -1,20 +1,58 @@
-import { Link } from "react-router-dom"
-import { getBooks } from "../../../services/books"
+import { Link} from "react-router-dom"
+import { deleteBook, getBooks } from "../../../services/books"
 import { useEffect, useState } from "react"
+import { getGenres } from "../../../services/genres";
+import { getAuthors } from "../../../services/authors";
 
 export default function Books() {
   const [books, setBooks] = useState([]);  
+  const [genres, setGenres] = useState([]);  
+  const [authors, setAuthors] = useState([]);  
   
+
   useEffect(() => {  
     const fetchBooks = async () => {  
       const data = await getBooks();  
       setBooks(data.data);  
+    }; 
+    const fetchGenres = async () => {  
+      const data = await getGenres();  
+      setGenres(data.data);  
     };  
+    const fetchAuthors = async () => {  
+      const data = await getAuthors();  
+      setAuthors(data.data);  
+    };   
   
     fetchBooks();  
+    fetchAuthors();  
+    fetchGenres();  
   }, []);
 
-  console.log(books)
+  const getGenreName = (id) => {
+    const genre = genres.find((item) => item.id === id);
+    return genre ? genre.name : "Unknown Genre";
+  };
+  const getAuthorName = (id) => {
+    const author = authors.find((item) => item.id === id);
+    return author ? author.name : "Unknown Author";
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this book?");
+    
+    if (confirmDelete) {
+      try {
+        await deleteBook(id); // Memanggil API untuk menghapus buku
+        setBooks(books.filter((book) => book.id !== id)); // Memperbarui state
+        alert("Book deleted successfully");
+      } catch (error) {
+        console.error("Failed to delete the book:", error);
+        alert("Failed to delete the book. Please try again later.");
+      }
+    }
+  };
+  
   
   return (
     <div
@@ -22,8 +60,12 @@ export default function Books() {
     >
       
       <div className="max-w-full overflow-x-auto">
-      <h1 className="sm:text-3xl text-2xl font-medium title-font text-indigo-900 mb-4 px-4">Books</h1>
-        <table className="w-full table-auto">
+      <h1 className="sm:text-3xl text-2xl font-medium title-font text-indigo-900 mb-4">Books</h1>
+      <Link to="/admin/books/create" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Add Data
+      <i className="fa-solid fa-plus pl-4"></i>
+      </Link>
+
+        <table className="w-full table-auto mt-4">
           <thead className="border-b bg-gray-50 text-white">
             <tr className="bg-gray-2 text-left :bg-meta-4">
               
@@ -55,12 +97,12 @@ export default function Books() {
               <th
                 className="px-4 py-4 font-medium text-black :text-white"
               >
-                genre_id
+                Genre
               </th>
               <th
                 className="px-4 py-4 font-medium text-black :text-white"
               >
-                author_id
+                Author
               </th>
               <th className="px-4 py-4 font-medium text-black :text-white">
                 Actions
@@ -95,31 +137,26 @@ export default function Books() {
                 </p>
               </td>
               <td className="px-4 py-5">
-                <p
-                  className="inline-flex rounded-full bg-success bg-opacity-10 px-5 py-1 text-sm font-medium text-success"
-                >
-                {book.cover_photo}
-                </p>
+                <img src={"http://127.0.0.1:8000/storage/books/" + book.cover_photo} className="w-20 h-30" alt="" />
               </td>
               <td className="px-5 py-5">
                 <p
                   className="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-blue-800"
                 >
-                {book.genre_id}
+                {getGenreName(book.genre_id)}
                 </p>
               </td>
               <td className="px-5 py-5">
                 <p
                   className="inline-flex rounded-full bg-success bg-opacity-10 px-5 py-1 text-sm font-medium text-blue-800"
                 >
-                {book.author_id}
+                {getAuthorName(book.author_id)}
                 </p>
               </td>
               <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">
-                  <Link to="/admin/books/create"><i className="fa-solid fa-plus"></i></Link>
                   <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
-                  <button>
+                  <button onClick={() => handleDelete(book.id)}>
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </div>

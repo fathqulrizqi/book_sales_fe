@@ -21,7 +21,11 @@ export default function Genres() {
     >
       <div className="max-w-full overflow-x-auto">
       <h1 className="sm:text-3xl text-2xl font-medium title-font text-indigo-900 mb-4 px-4">Genres</h1>
-        <table className="w-full table-auto">
+      <Link to="create" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Add Data
+      <i className="fa-solid fa-plus pl-4"></i>
+      </Link>
+
+        <table className="w-full table-auto mt-4">
           <thead className="border-b bg-gray-50 text-white">
             <tr className="bg-gray-2 text-left :bg-meta-4">
               <th
@@ -52,7 +56,6 @@ export default function Genres() {
               </td>
               <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">
-                  <Link to="create"><i className="fa-solid fa-plus"></i></Link>
                   <Link to="edit"><i className="fa-solid fa-pen-to-square"></i></Link>
                   <button>
                     <i className="fa-solid fa-trash"></i>
