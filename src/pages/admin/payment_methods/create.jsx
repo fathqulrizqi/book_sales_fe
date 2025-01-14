@@ -1,5 +1,43 @@
+import { useState } from "react";
+import { createPaymentMethods } from "../../../services/payment_methods";
+import { useNavigate } from "react-router-dom";
 
 export default function PaymentMethodsCreate() {
+  const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
+  const [paymentMethodsData, setPaymentMethodsData] = useState({
+    name: "",
+    account_number: "",
+    image: "",
+  })
+
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setPaymentMethodsData({...paymentMethodsData, [name]: value});
+    }
+
+    const handleFileChange = (e) => {
+      setPaymentMethodsData({...paymentMethodsData, image: e.target.files[0]});
+    }
+
+    const storePaymentMethods = async (e) => {
+      e.preventDefault();
+  
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', paymentMethodsData.name);
+      formDataToSend.append('account_number', paymentMethodsData.account_number);
+      formDataToSend.append('image', paymentMethodsData.image);
+  
+      try {
+        await createPaymentMethods(formDataToSend);
+        navigate('/admin/payment_methods');
+      } catch (error) {
+        setErrors(error.response.data.message);
+      }
+    }
+
+
+  
   return (
     <div className="flex flex-col gap-9">
       <div
@@ -12,7 +50,7 @@ export default function PaymentMethodsCreate() {
             Add Data Payment Methods
           </h3>
         </div>
-        <form action="#" className="py-5">
+        <form onSubmit={storePaymentMethods} className="py-5">
           <div className="p-6.5 flex flex-col gap-5">
             
             <div className="mb-4.5">
@@ -22,22 +60,63 @@ export default function PaymentMethodsCreate() {
                 Name
               </label>
               <input
+                name="name"
+                value={paymentMethodsData.name}
+                onChange={handleInputChange}
                 type="text"
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               />
+              {errors.name && (
+                <div className="p-2 mt-2 text-red-500 rounded-lg bg-red-50" role="alert">
+                  <span className="font-semibold">
+                  {errors.name[0]}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="mb-4.5">
               <label
                 className="mb-3 block text-base font-medium text-black :text-white"
               >
-                Description
+                Account Number
               </label>
-              <textarea
-                rows="6"
+              <input
+                name="account_number"
+                value={paymentMethodsData.account_number}
+                type="number"
+                onChange={handleInputChange}
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
-              ></textarea>
+              />
+              {errors.account_number && (
+                <div className="p-2 mt-2 text-red-500 rounded-lg bg-red-50" role="alert">
+                  <span className="font-semibold">
+                  {errors.account_number[0]}
+                  </span>
+                </div>
+              )}
             </div>
+
+            <div className="mb-4.5">
+              <label
+                className="mb-3 block text-sm font-medium text-black :text-white"
+              >
+                Attach file
+              </label>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent font-normal outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-indigo-600 file:hover:bg-opacity-10 focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :file:border-form-stroke :file:bg-white/30 :file:text-white :focus:border-indigo-600"
+              />
+              {errors.image && (
+                <div className="p-2 mt-2 text-red-500 rounded-lg bg-red-50" role="alert">
+                  <span className="font-semibold">
+                  {errors.image[0]}
+                  </span>
+                </div>
+              )}
+            </div>
+            
 
             <button
               type="submit"
