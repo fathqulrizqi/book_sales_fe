@@ -7,8 +7,18 @@ export const getAuthors = async () => {
 
 export const createAuthor = async (data) => {
   try {
-    const { data: response } = await API.post('/authors', data)
-    return response
+    const response = await API.post('/authors', data)
+    return response.data
+  } catch (error) {
+      console.log(error)
+      throw error
+  }
+}
+
+export const updateAuthor = async (id, data) => {
+  try {
+    const response = await API.post(`/authors/${id}`, data)
+    return response.data
   } catch (error) {
       console.log(error)
       throw error

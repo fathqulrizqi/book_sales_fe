@@ -52,7 +52,7 @@ function App() {
             </Route>
             <Route path="authors">
               <Route index element={<Authors />} />
-              <Route path="edit" element={<AuthorEdit />} />
+              <Route path="edit/:id" element={<AuthorEdit />} />
               <Route path="create" element={<AuthorCreate />} />
             </Route>
             <Route path="payment_methods">
