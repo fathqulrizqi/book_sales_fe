@@ -1,106 +1,192 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getBooks, updateBook } from "../../../services/books";
+import { getGenres } from "../../../services/genres";
+import { getAuthors } from "../../../services/authors";
 
 export default function BookEdit() {
+  const [genres, setGenres] = useState([]);
+  const [authors, setAuthors] = useState([]);
+
+  // State untuk menampung data
+  const [image, setImage] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [genreId, setGenreId] = useState("");
+  const [authorId, setAuthorId] = useState("");
+
+  // Desctruct ID dari URL
+  const { id } = useParams();
+  const navigate = useNavigate()
+
+  // fetch data buku berdasarkan ID
+  const fetchBookDetails = async () => {
+    const data = await getBooks(); // ambil semua data buku
+
+    // cari data buku berdasarkan ID
+    const book = data.find((book) => book.id === parseInt(id));
+    if (book) {
+      // Assign data to state
+      setTitle(book.title);
+      setDescription(book.description);
+      setPrice(book.price);
+      setStock(book.stock);
+      setGenreId(book.genre_id);
+      setAuthorId(book.author_id);
+    }
+  };
+
+  const fetchGenres = async () => {
+    const data = await getGenres();
+    setGenres(data.data);
+  };
+
+  const fetchAuthors = async () => {
+    const data = await getAuthors();
+    setAuthors(data.data);
+  };
+
+  useEffect(() => {
+    fetchBookDetails();
+    fetchGenres();
+    fetchAuthors();
+  }, []);
+
+  // handle file change
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0])
+  }
+
+  // update book data
+  const updateBookDetails = async (e) => {
+    e.preventDefault()
+
+    // buat FormData
+    const bookData = new FormData()
+
+    bookData.append('title', title)
+    bookData.append('description', description)
+    bookData.append('price', price)
+    bookData.append('stock', stock)
+    bookData.append('genre_id', genreId)
+    bookData.append('author_id', authorId)
+    bookData.append('_method', 'PUT')
+
+    if (image) {
+      bookData.append('cover_photo', image)
+    }
+
+    await updateBook(id, bookData)
+      .then(() => {
+        // redirect ke halaman index
+        navigate('/admin/books')
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+
   return (
     <div className="flex flex-col gap-9">
-      <div
-        className="rounded-sm bg-white shadow-default :bg-boxdark"
-      >
-        <div
-          className="border-b border-stroke px-6.5 py-4 :border-strokedark"
-        >
-          <h3 className="font-medium text-black :text-white">
-            Edit Data Book
-          </h3>
+      <div className="rounded-sm bg-white shadow-default :bg-box">
+        <div className="border-b border-stroke px-6.5 py-4 :border-stroke">
+          <h3 className="font-medium text-black :text-white">Edit Data</h3>
         </div>
-        <form action="#" className="py-5">
+        <form onSubmit={ updateBookDetails } className="py-5">
           <div className="p-6.5 flex flex-col gap-5">
-
             <div className="mb-4.5">
-              <label
-                className="mb-3 block text-sm font-medium text-black :text-white"
-              >
+              <label className="mb-3 block text-sm font-medium text-black :text-white">
                 Title
               </label>
               <input
                 type="text"
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-strokedark :bg-form-input :text-white :focus:border-indigo-600"
+                name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               />
             </div>
 
             <div className="mb-4.5">
-              <label
-                className="mb-3 block text-sm font-medium text-black :text-white"
-              >
+              <label className="mb-3 block text-sm font-medium text-black :text-white">
                 Description
               </label>
               <textarea
                 rows="6"
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-strokedark :bg-form-input :text-white :focus:border-indigo-600"
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               ></textarea>
             </div>
 
             <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
               <div className="w-full xl:w-1/2">
-                <label
-                  className="mb-3 block text-sm font-medium text-black :text-white"
-                >
+                <label className="mb-3 block text-sm font-medium text-black :text-white">
                   Price
                 </label>
                 <input
                   type="number"
+                  name="price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                   min={1}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-strokedark :bg-form-input :text-white :focus:border-indigo-600"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
                 />
               </div>
 
               <div className="w-full xl:w-1/2">
-                <label
-                  className="mb-3 block text-sm font-medium text-black :text-white"
-                >
+                <label className="mb-3 block text-sm font-medium text-black :text-white">
                   Stock
                 </label>
                 <input
                   type="number"
+                  name="stock"
+                  value={stock}
+                  onChange={(e) => setStock(e.target.value)}
                   min={1}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-strokedark :bg-form-input :text-white :focus:border-indigo-600"
+                  className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
                 />
               </div>
             </div>
 
             <div className="mb-4.5">
-              <label
-                className="mb-3 block text-sm font-medium text-black :text-white"
-              >
+              <label className="mb-3 block text-sm font-medium text-black :text-white">
                 Attach file
               </label>
               <input
                 type="file"
-                className="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent font-normal outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-indigo-600 file:hover:bg-opacity-10 focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-strokedark :bg-form-input :file:border-form-strokedark :file:bg-white/30 :file:text-white :focus:border-indigo-600"
+                onChange={handleFileChange}
+                className="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent font-normal outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:px-5 file:py-3 file:hover:bg-indigo-600 file:hover:bg-opacity-10 focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :file:border-form-stroke :file:bg-white/30 :file:text-white :focus:border-indigo-600"
               />
             </div>
 
             <div className="mb-4.5">
-              <label
-                className="mb-3 block text-sm font-medium text-black :text-white"
-              >
+              <label className="mb-3 block text-sm font-medium text-black :text-white">
                 Genre
               </label>
-              <div
-                className="relative z-20 bg-transparent :bg-form-input"
-              >
-                <select
-                  className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-indigo-600 active:border-indigo-600 :border-form-strokedark :bg-form-input :focus:border-indigo-600"
-                >
+              <div className="relative z-20 bg-transparent :bg-form-input">
+                <select 
+                  name="genre_id"
+                  value={genreId}
+                  onChange={(e) => setGenreId(e.target.value)} 
+                  className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-indigo-600 active:border-indigo-600 :border-form-stroke :bg-form-input :focus:border-indigo-600">
                   <option value="" className="text-body">
                     --select genre--
                   </option>
-                  <option value="" className="text-body">Genre 1</option>
-                  <option value="" className="text-body">Genre 2</option>
-                  <option value="" className="text-body">Genre 3</option>
+                  {genres.map((genre) => (
+                    <option
+                      key={genre.id}
+                      value={genre.id}
+                      className="text-body"
+                    >
+                      {genre.name}
+                    </option>
+                  ))}
                 </select>
-                <span
-                  className="absolute right-4 top-1/2 z-30 -translate-y-1/2"
-                >
+                <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
                   <svg
                     className="fill-current"
                     width="24"
@@ -122,27 +208,29 @@ export default function BookEdit() {
               </div>
             </div>
             <div className="mb-4.5">
-              <label
-                className="mb-3 block text-sm font-medium text-black :text-white"
-              >
+              <label className="mb-3 block text-sm font-medium text-black :text-white">
                 Author
               </label>
-              <div
-                className="relative z-20 bg-transparent :bg-form-input"
-              >
-                <select
-                  className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-indigo-600 active:border-indigo-600 :border-form-strokedark :bg-form-input :focus:border-indigo-600"
-                >
+              <div className="relative z-20 bg-transparent :bg-form-input">
+                <select 
+                  name="author_id"
+                  value={authorId}
+                  onChange={(e) => setAuthorId(e.target.value)}
+                  className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-indigo-600 active:border-indigo-600 :border-form-stroke :bg-form-input :focus:border-indigo-600">
                   <option value="" className="text-body">
                     --select author--
                   </option>
-                  <option value="" className="text-body">Author 1</option>
-                  <option value="" className="text-body">Author 2</option>
-                  <option value="" className="text-body">Author 3</option>
+                  {authors.map((author) => (
+                    <option
+                      key={author.id}
+                      value={author.id}
+                      className="text-body"
+                    >
+                      {author.name}
+                    </option>
+                  ))}
                 </select>
-                <span
-                  className="absolute right-4 top-1/2 z-30 -translate-y-1/2"
-                >
+                <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
                   <svg
                     className="fill-current"
                     width="24"
@@ -174,5 +262,5 @@ export default function BookEdit() {
         </form>
       </div>
     </div>
-  )
+  );
 }

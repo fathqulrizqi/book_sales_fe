@@ -13,7 +13,7 @@ export default function Books() {
   useEffect(() => {  
     const fetchBooks = async () => {  
       const data = await getBooks();  
-      setBooks(data.data);  
+      setBooks(data);  
     }; 
     const fetchGenres = async () => {  
       const data = await getGenres();  
@@ -39,20 +39,15 @@ export default function Books() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this book?");
-    
-    if (confirmDelete) {
-      try {
-        await deleteBook(id); // Memanggil API untuk menghapus buku
-        setBooks(books.filter((book) => book.id !== id)); // Memperbarui state
+      const confirmDelete =window.confirm("Are you sure you want to delete this book?");
+
+      if (!confirmDelete) {
+        await deleteBook(id);
+        setBooks(books.filter((book) => book.id !== id));
         alert("Book deleted successfully");
-      } catch (error) {
-        console.error("Failed to delete the book:", error);
-        alert("Failed to delete the book. Please try again later.");
       }
-    }
   };
-  
+
   
   return (
     <div
@@ -155,8 +150,8 @@ export default function Books() {
               </td>
               <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">
-                  <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
-                  <button onClick={() => handleDelete(book.id)}>
+                  <Link to={`/admin/books/edit/${book.id}`}><i className="fa-solid fa-pen-to-square"></i></Link>
+                  <button onClick={() => handleDelete }>
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </div>

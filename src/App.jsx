@@ -43,7 +43,7 @@ function App() {
             <Route path="books">
               <Route index element={<AdminBooks />} />
               <Route path="create" element={<BookCreate />} />
-              <Route path="edit" element={<BookEdit />} />
+              <Route path="edit/:id" element={<BookEdit />} />
             </Route>
             <Route path="genres">
               <Route index element={<Genres />} />
