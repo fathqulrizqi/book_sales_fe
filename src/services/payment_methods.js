@@ -7,8 +7,18 @@ export const getPaymentMethods = async () => {
 
 export const createPaymentMethods = async (data) => {
   try {
-    const { data: response } = await API.post('/payment_methods', data)
-    return response
+    const response = await API.post('/payment_methods', data)
+    return response.data
+  } catch (error) {
+      console.log(error)
+      throw error
+  }
+}
+
+export const updatePaymentMethods = async (id, data) => {
+  try {
+    const response = await API.post(`/payment_methods/${id}`, data)
+    return response.data
   } catch (error) {
       console.log(error)
       throw error

@@ -57,7 +57,7 @@ function App() {
             </Route>
             <Route path="payment_methods">
               <Route index element={<PaymentMethods />} />
-              <Route path="edit" element={<PaymentMethodsEdit />} />
+              <Route path="edit/:id" element={<PaymentMethodsEdit />} />
               <Route path="create" element={<PaymentMethodsCreate />} />
             </Route>
           </Route>
