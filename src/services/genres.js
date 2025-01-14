@@ -7,8 +7,8 @@ export const getGenres = async () => {
 
 export const createGenre = async (data) => {
   try {
-    const data = await API.post('/genres', data)
-    return response
+    const response = await API.post('/genres', data)
+    return response.data
   } catch (error) {
       console.log(error)
       throw error
