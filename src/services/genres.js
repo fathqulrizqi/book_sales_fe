@@ -15,6 +15,16 @@ export const createGenre = async (data) => {
   }
 }
 
+export const updateGenre = async (id, data) => {
+  try {
+    const response= await API.post(`/genres/${id}`, data)
+    return response.data
+  } catch (error) {
+      console.log(error)
+      throw error
+  }
+}
+
 export const deleteGenre = async (id) => {
   try {
     const { data: response } = await API.delete(`/genres/${id}`)

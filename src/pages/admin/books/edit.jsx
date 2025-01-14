@@ -28,7 +28,6 @@ export default function BookEdit() {
     // cari data buku berdasarkan ID
     const book = data.find((book) => book.id === parseInt(id));
     if (book) {
-      // Assign data to state
       setTitle(book.title);
       setDescription(book.description);
       setPrice(book.price);

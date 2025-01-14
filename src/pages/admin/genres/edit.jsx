@@ -1,5 +1,47 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"
+import { getGenres, updateGenre } from "../../../services/genres";
 
 export default function GenreEdit() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+  
+  const fetchGenreDetails = async () => {
+    const data = await getGenres(); 
+
+    const genre = data.data.find((genre) => genre.id === parseInt(id));
+    if (genre) {
+      setName(genre.name);
+      setDescription(genre.description);
+    }
+  };
+
+  useEffect(() => {
+    fetchGenreDetails();
+  }, []);
+
+  const updateGenreDetails = async (e) => {
+    e.preventDefault();
+
+    const genreData = new FormData()
+
+    genreData.append('name', name)
+    genreData.append('description', description)
+    genreData.append('_method', 'PUT')
+
+     await updateGenre(id, genreData)
+
+      .then(() => {
+        navigate('/admin/genres')
+      })
+      .catch((err) => {
+        console.log(err.response.data.message)
+      })
+  }
+
   return (
     <div className="flex flex-col gap-9">
       <div
@@ -12,7 +54,7 @@ export default function GenreEdit() {
             Edit Data Genre
           </h3>
         </div>
-        <form action="#" className="py-5">
+        <form onSubmit={updateGenreDetails} className="py-5">
           <div className="p-6.5 flex flex-col gap-5">
             
             <div className="mb-4.5">
@@ -23,6 +65,9 @@ export default function GenreEdit() {
               </label>
               <input
                 type="text"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               />
             </div>
@@ -35,6 +80,9 @@ export default function GenreEdit() {
               </label>
               <textarea
                 rows="6"
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-indigo-600 active:border-indigo-600 disabled:cursor-default disabled:bg-whiter :border-form-stroke :bg-form-input :text-white :focus:border-indigo-600"
               ></textarea>
             </div>

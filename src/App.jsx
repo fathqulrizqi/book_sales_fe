@@ -47,7 +47,7 @@ function App() {
             </Route>
             <Route path="genres">
               <Route index element={<Genres />} />
-              <Route path="edit" element={<GenreEdit />} />
+              <Route path="edit/:id" element={<GenreEdit />} />
               <Route path="create" element={<GenreCreate />} />
             </Route>
             <Route path="authors">
