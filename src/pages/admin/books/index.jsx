@@ -81,7 +81,7 @@ export default function Books() {
               <th className="px-4 py-4 font-medium text-black :text-white">
                 Stock
               </th>
-              <th className="px-4 py-4 font-medium text-black :text-white xl:pl-11">
+              <th className="px-4 py-4 font-medium text-black :text-white ">
                 Cover Photo
               </th>
               <th className="px-4 py-4 font-medium text-black :text-white">
