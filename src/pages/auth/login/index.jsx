@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { login } from "../../../services/auth";
 
 export default function Login() {
@@ -14,6 +14,8 @@ export default function Login() {
     setLoginData({ ...loginData, [name]: value });
   }
 
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,15 @@ export default function Login() {
         localStorage.setItem("userInfo", JSON.stringify(res.user));
         navigate("/");
       }
-  }
+
+    try {
+      navigate(from);
+    } catch (error) {
+      console.log(error);
+      alert("Login failed, please try again.");
+    }
+  };
+  
 
   const accessToken = localStorage.getItem("accessToken");
 

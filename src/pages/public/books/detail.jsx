@@ -23,7 +23,7 @@ export default function BookDetail() {
   useEffect(() => {
     fetchAllData();
   }, [id]);
-  
+
   const genreName = genre.find((g) => g.id === book?.genre_id)?.name;
 
   const formatRupiah = (number) => {
@@ -37,17 +37,22 @@ export default function BookDetail() {
 
   const handleInput = (e) => {
     setQuantity(e.target.value);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must log in to place an order.");
+      return navigate("/login", { state: { from: `/books/${id}` } });
+    }
 
     const data = {
       book_id: id,
       quantity: quantity,
     };
 
-    
     try {
       await createOrder(data);
       alert("Order created successfully");
@@ -56,8 +61,6 @@ export default function BookDetail() {
       console.log(error);
     }
   };
-
-  
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -158,7 +161,10 @@ export default function BookDetail() {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   {formatRupiah(book.price)}
                 </span>
-                <button type="submit" className="inline text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                <button
+                  type="submit"
+                  className="inline text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                >
                   Buy
                 </button>
               </div>
