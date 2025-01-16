@@ -19,3 +19,13 @@ export const logout = () => {
     throw error;
   }
 }
+
+export const register = async (data) => {
+  try {
+    const response = await API.post('/register', data)
+    return response.data
+} catch (error) {
+    console.log(error)
+    throw error
+}
+}

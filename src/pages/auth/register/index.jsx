@@ -1,8 +1,50 @@
-
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../../services/auth";
 
 export default function Register() {
-  
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  })
+  const navigate = useNavigate();
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterData({...registerData, [name]: value});
+  }
+
+  const handleTermsChange = (e) => { 
+    setIsTermsChecked(e.target.checked);
+  }
+
+  console.log(registerData)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (registerData.password !== registerData.confirm_password) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    if (!isTermsChecked) {
+      alert("Please accept the terms and conditions");
+      return;
+    }
+    
+    try {
+      await register(registerData);
+      alert("Registration successful");
+      return navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
   return (
     <section className="bg-gray-50 :bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -20,8 +62,8 @@ export default function Register() {
                   Your Name
                 </label>
                 <input
-                  onChange={handleInput}
                   value={registerData.name}
+                  onChange={handleInputChange}
                   type="text"
                   name="name"
                   id="email"
@@ -38,8 +80,8 @@ export default function Register() {
                   Your email
                 </label>
                 <input
-                  onChange={handleInput}
                   value={registerData.email}
+                  onChange={handleInputChange}
                   type="email"
                   name="email"
                   id="email"
@@ -56,8 +98,8 @@ export default function Register() {
                   Password
                 </label>
                 <input
-                  onChange={handleInput}
                   value={registerData.password}
+                  onChange={handleInputChange}
                   type="password"
                   name="password"
                   id="password"
@@ -74,8 +116,8 @@ export default function Register() {
                   Confirm password
                 </label>
                 <input
-                  onChange={handleInput}
                   value={registerData.confirm_password}
+                  onChange={handleInputChange}
                   type="password"
                   name="confirm_password"
                   id="confirm-password"
@@ -87,6 +129,7 @@ export default function Register() {
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
+                    onChange={handleTermsChange}
                     id="terms"
                     aria-describedby="terms"
                     type="checkbox"
