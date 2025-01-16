@@ -21,6 +21,7 @@ import AuthorCreate from "./pages/admin/authors/create.jsx"
 import PaymentMethodsEdit from "./pages/admin/payment_methods/edit.jsx"
 import PaymentMethodsCreate from "./pages/admin/payment_methods/create.jsx"
 import PaymentMethods from "./pages/admin/payment_methods/index.jsx"
+import BookDetail from "./pages/public/books/detail.jsx"
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="/books" element={<PublicBooks />} />
+            <Route path="/books/:id" element={<BookDetail />} />
             <Route path="/developer" element={<Developer />} />
             <Route path="/contacts" element={<Contact />} />
           </Route>

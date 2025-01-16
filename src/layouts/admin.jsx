@@ -73,13 +73,13 @@ export default function AdminLayout() {
                     className="text-right text-sm text-gray-900 :text-white"
                     role="none"
                   >
-                    {userInfo.name}
+                    {userInfo ? userInfo.name : ""}
                   </p>
                   <p
                     className="text-sm font-medium text-gray-900 truncate :text-gray-300"
                     role="none"
                   >
-                    {userInfo.email}
+                    {userInfo ? userInfo.email : ""}
                   </p>
                 </div>
                 <div>
@@ -306,7 +306,7 @@ export default function AdminLayout() {
             <li>
               <button
                 onClick={handleLogout}
-                className="flex items-center p-2 text-gray-900 rounded-lg :text-white bg-red-300 hover:border-2 hover:border-red-500 hover:bg-transparent group"
+                className="flex items-center p-2 text-gray-900 rounded-lg :text-white hover:border-2 hover:border-red-500 hover:bg-transparent group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 :text-gray-400 group-hover:text-gray-900 :group-hover:text-white"
@@ -320,7 +320,6 @@ export default function AdminLayout() {
                 <span className="flex-1 ms-3 whitespace-nowrap">Log Out</span>
               </button>
             </li>
-
           </ul>
         </div>
       </aside>

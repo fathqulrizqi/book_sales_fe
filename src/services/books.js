@@ -17,7 +17,7 @@ export const createBook = async (data) => {
 
 export const updateBook = async (id, data) => {
   try {
-    const response= await API.post(`/books/${id}`, data)
+    const response = await API.post(`/books/${id}`, data)
     return response.data
   } catch (error) {
       console.log(error)
@@ -29,6 +29,16 @@ export const deleteBook = async (id) => {
   try {
     const { data: response } = await API.delete(`/books/${id}`)
     return response
+  } catch (error) {
+      console.log(error)
+      throw error
+  }
+}
+
+export const showBook = async (id) => {
+  try {
+    const {data} = await API.get(`/books/${id}`)
+    return data.data
   } catch (error) {
       console.log(error)
       throw error
