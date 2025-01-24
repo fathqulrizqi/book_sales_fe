@@ -1,5 +1,3 @@
-import teams from "../../../utils/constants/teams"
-
 export default function Developer() {
   return (
     <section className="text-gray-600 body-font">

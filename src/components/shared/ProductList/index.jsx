@@ -37,9 +37,9 @@ export default function ProductList( {datas} ) {
                 <img
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"
-                  src={
-                    "http://127.0.0.1:8000/storage/books/" + book.cover_photo
-                  }
+                  src=
+                    {book.cover_photo}
+                  
                 />
               </Link>
               <div className="mt-4">
