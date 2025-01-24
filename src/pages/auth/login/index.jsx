@@ -15,33 +15,29 @@ export default function Login() {
   }
 
   const location = useLocation();
-  const from = location.state?.from || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-      const res = await login(loginData); // Call the login function
+  
+    try {
+      const res = await login(loginData);
       console.log(res);
-      // Check Role & Redirect
+  
       if (res.user.role === "admin" || res.user.role === "staff") {
         localStorage.setItem("accessToken", res.token);
         localStorage.setItem("userInfo", JSON.stringify(res.user));
-        navigate("/admin");
+        navigate("/admin"); // Arahkan ke admin layout
       } else {
         localStorage.setItem("accessToken", res.token);
         localStorage.setItem("userInfo", JSON.stringify(res.user));
-        navigate("/");
+        navigate("/"); // Arahkan ke halaman publik
       }
-
-    try {
-      navigate(from);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       alert("Login failed, please try again.");
     }
   };
   
-
   const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {

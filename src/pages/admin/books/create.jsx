@@ -6,7 +6,7 @@ import { createBook } from "../../../services/books";
 import { useNavigate } from "react-router-dom";
 
 export default function BookCreate() {
-  const [errors, setErrors] = useState([{}]);
+  const [errors, setErrors] = useState({});
   const [genres, setGenres] = useState([]);  
   const [authors, setAuthors] = useState([]);
   const [bookData, setBookData] = useState({
