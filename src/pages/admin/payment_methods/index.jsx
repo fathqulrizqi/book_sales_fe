@@ -74,7 +74,7 @@ export default function PaymentMethods() {
                 <p className="text-black :text-white">{payment_method.account_number}</p>
               </td>
               <td className="px-4 py-5">
-                <img src={"http://127.0.0.1:8000/storage/payment_methods/" + payment_method.image} className="w-20 h-30" alt="" />
+                <img src={"http://127.0.0.1:8001/storage/payment_methods/" + payment_method.image} className="w-20 h-30" alt="" />
               </td>
               <td className="px-4 py-5">
                 <div className="flex items-center space-x-3.5">

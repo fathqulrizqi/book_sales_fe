@@ -7,7 +7,11 @@ export const getPaymentMethods = async () => {
 
 export const createPaymentMethods = async (data) => {
   try {
-    const response = await API.post('/payment_methods', data)
+    const response = await API.post('/payment_methods', data, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
     return response.data
   } catch (error) {
       console.log(error)
@@ -17,7 +21,11 @@ export const createPaymentMethods = async (data) => {
 
 export const updatePaymentMethods = async (id, data) => {
   try {
-    const response = await API.post(`/payment_methods/${id}`, data)
+    const response = await API.post(`/payment_methods/${id}`, data, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
     return response.data
   } catch (error) {
       console.log(error)
@@ -27,7 +35,11 @@ export const updatePaymentMethods = async (id, data) => {
 
 export const deletePaymentMethods = async (id) => {
   try {
-    const { data: response } = await API.delete(`/payment_methods/${id}`)
+    const { data: response } = await API.delete(`/payment_methods/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
     return response
   } catch (error) {
       console.log(error)
