@@ -72,7 +72,7 @@ export default function BookDetail() {
           <img
             alt="ecommerce"
             className="w-1/3 h-full object-cover object-center rounded"
-            src={book.cover_photo}
+            src={"http://127.0.0.1:8001/storage/books/" + book.cover_photo}
           />
 
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

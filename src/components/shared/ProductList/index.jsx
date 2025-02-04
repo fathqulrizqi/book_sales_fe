@@ -38,7 +38,7 @@ export default function ProductList( {datas} ) {
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"
                   src=
-                    {book.cover_photo}
+                    {"http://localhost:8001/storage/books/" + book.cover_photo}
                   
                 />
               </Link>
