@@ -122,10 +122,7 @@ export default function Books() {
                   </td>
                   <td className="px-4 py-5">
                     <img
-                      src={
-                        
-                        book.cover_photo
-                      }
+                      src={'http://127.0.0.1:8001/storage/books/' + book.cover_photo}
                       className="w-20 h-30"
                       alt=""
                     />

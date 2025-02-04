@@ -21,7 +21,11 @@ export const createBook = async (data) => {
 
 export const updateBook = async (id, data) => {
   try {
-    const response = await API.post(`/books/${id}`, data)
+    const response = await API.post(`/books/${id}`, data, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
     return response.data
   } catch (error) {
       console.log(error)
@@ -31,7 +35,11 @@ export const updateBook = async (id, data) => {
 
 export const deleteBook = async (id) => {
   try {
-    const { data: response } = await API.delete(`/books/${id}`)
+    const { data: response } = await API.delete(`/books/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
     return response
   } catch (error) {
       console.log(error)
