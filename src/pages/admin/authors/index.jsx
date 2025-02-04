@@ -66,7 +66,7 @@ export default function Authors() {
               <td
                 className="px-4 py-5 pl-9 xl:pl-11"
               >
-                <img src={"http://127.0.0.1:8000/storage/authors/" + author.photo} className="w-20 h-30" alt="" />
+                <img src={"http://127.0.0.1:8001/storage/authors/" + author.photo} className="w-20 h-30" alt="" />
               </td>
               <td
                 className="px-4 py-5 pl-9 xl:pl-11"
