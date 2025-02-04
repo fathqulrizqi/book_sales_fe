@@ -42,11 +42,13 @@ export default function BookDetail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     if (!token) {
       alert("You must log in to place an order.");
       return navigate("/login", { state: { from: `/books/${id}` } });
     }
+
+    console.log(token);
 
     const data = {
       book_id: id,
